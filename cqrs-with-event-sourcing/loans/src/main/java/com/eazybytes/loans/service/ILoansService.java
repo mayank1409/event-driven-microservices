@@ -1,14 +1,17 @@
 package com.eazybytes.loans.service;
 
+import com.eazybytes.loans.command.event.LoanCreatedEvent;
+import com.eazybytes.loans.command.event.LoanDeletedEvent;
+import com.eazybytes.loans.command.event.LoanUpdatedEvent;
 import com.eazybytes.loans.dto.LoansDto;
 
 public interface ILoansService {
 
     /**
      *
-     * @param mobileNumber - Mobile Number of the Customer
+     * @param loanCreatedEvent - LoanCreatedEvent Object
      */
-    void createLoan(String mobileNumber);
+    void createLoan(LoanCreatedEvent loanCreatedEvent);
 
     /**
      *
@@ -19,16 +22,15 @@ public interface ILoansService {
 
     /**
      *
-     * @param loansDto - LoansDto Object
+     * @param loanUpdatedEvent - LoanUpdatedEvent Object
      * @return boolean indicating if the update of card details is successful or not
      */
-    boolean updateLoan(LoansDto loansDto);
+    boolean updateLoan(LoanUpdatedEvent loanUpdatedEvent);
 
     /**
      *
-     * @param loanNumber - Input Loan Number
+     * @param loanDeletedEvent - LoanDeletedEvent Object
      * @return boolean indicating if the delete of loan details is successful or not
      */
-    boolean deleteLoan(Long loanNumber);
-
+    boolean deleteLoan(LoanDeletedEvent loanDeletedEvent);
 }

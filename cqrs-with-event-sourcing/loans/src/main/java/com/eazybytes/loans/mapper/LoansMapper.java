@@ -1,5 +1,6 @@
 package com.eazybytes.loans.mapper;
 
+import com.eazybytes.loans.command.event.LoanUpdatedEvent;
 import com.eazybytes.loans.dto.LoansDto;
 import com.eazybytes.loans.entity.Loans;
 
@@ -16,12 +17,10 @@ public class LoansMapper {
         return loansDto;
     }
 
-    public static Loans mapToLoans(LoansDto loansDto, Loans loans) {
-        loans.setLoanType(loansDto.getLoanType());
-        loans.setTotalLoan(loansDto.getTotalLoan());
-        loans.setAmountPaid(loansDto.getAmountPaid());
-        loans.setOutstandingAmount(loansDto.getOutstandingAmount());
-        return loans;
+    public static void mapEventToLoan(LoanUpdatedEvent loanUpdatedEvent, Loans loan) {
+        loan.setLoanType(loanUpdatedEvent.getLoanType());
+        loan.setTotalLoan(loanUpdatedEvent.getTotalLoan());
+        loan.setAmountPaid(loanUpdatedEvent.getAmountPaid());
+        loan.setOutstandingAmount(loanUpdatedEvent.getOutstandingAmount());
     }
-
 }

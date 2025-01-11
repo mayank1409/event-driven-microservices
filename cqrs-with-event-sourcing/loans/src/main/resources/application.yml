@@ -48,7 +48,7 @@ logging:
 axon:
   eventhandling:
     processors:
-      customer-group:
+      loan-group:
         mode: subscribing
   axonserver:
     servers: localhost:8124
