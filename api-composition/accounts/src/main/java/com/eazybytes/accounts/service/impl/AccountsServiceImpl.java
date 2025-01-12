@@ -55,8 +55,7 @@ public class AccountsServiceImpl  implements IAccountsService {
     @Override
     public AccountsDto fetchAccount(String mobileNumber) {
         Accounts account = accountsRepository.findByMobileNumberAndActiveSw(mobileNumber, AccountsConstants.ACTIVE_SW)
-                .orElseThrow(() -> new ResourceNotFoundException("Account", "mobileNumber", mobileNumber)
-        );
+                .orElseThrow(() -> new ResourceNotFoundException("Account", "mobileNumber", mobileNumber));
         AccountsDto accountsDto = AccountsMapper.mapToAccountsDto(account, new AccountsDto());
         return accountsDto;
     }
@@ -67,12 +66,11 @@ public class AccountsServiceImpl  implements IAccountsService {
      */
     @Override
     public boolean updateAccount(AccountsDto accountsDto) {
-        Accounts account = accountsRepository.findByMobileNumberAndActiveSw(accountsDto.getMobileNumber(),
-                AccountsConstants.ACTIVE_SW).orElseThrow(() -> new ResourceNotFoundException("Account", "mobileNumber",
-                accountsDto.getMobileNumber()));
+        Accounts account = accountsRepository.findByMobileNumberAndActiveSw(accountsDto.getMobileNumber(), AccountsConstants.ACTIVE_SW)
+                .orElseThrow(() -> new ResourceNotFoundException("Account", "mobileNumber", accountsDto.getMobileNumber()));
         AccountsMapper.mapToAccounts(accountsDto, account);
         accountsRepository.save(account);
-        return  true;
+        return true;
     }
 
     /**
@@ -81,9 +79,8 @@ public class AccountsServiceImpl  implements IAccountsService {
      */
     @Override
     public boolean deleteAccount(Long accountNumber) {
-        Accounts account = accountsRepository.findById(accountNumber).orElseThrow(
-                () -> new ResourceNotFoundException("Account", "accountNumber", accountNumber.toString())
-        );
+        Accounts account = accountsRepository.findById(accountNumber)
+                .orElseThrow(() -> new ResourceNotFoundException("Account", "accountNumber", accountNumber.toString()));
         account.setActiveSw(AccountsConstants.IN_ACTIVE_SW);
         accountsRepository.save(account);
         return true;

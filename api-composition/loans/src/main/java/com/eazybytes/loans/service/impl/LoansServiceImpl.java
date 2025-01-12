@@ -57,8 +57,7 @@ public class LoansServiceImpl implements ILoansService {
     @Override
     public LoansDto fetchLoan(String mobileNumber) {
         Loans loan = loansRepository.findByMobileNumberAndActiveSw(mobileNumber, LoansConstants.ACTIVE_SW)
-                .orElseThrow(() -> new ResourceNotFoundException("Loan", "mobileNumber", mobileNumber)
-                );
+                .orElseThrow(() -> new ResourceNotFoundException("Loan", "mobileNumber", mobileNumber));
         return LoansMapper.mapToLoansDto(loan, new LoansDto());
     }
 
@@ -68,9 +67,8 @@ public class LoansServiceImpl implements ILoansService {
      */
     @Override
     public boolean updateLoan(LoansDto loansDto) {
-        Loans loan = loansRepository.findByMobileNumberAndActiveSw(loansDto.getMobileNumber(),
-                LoansConstants.ACTIVE_SW).orElseThrow(
-                () -> new ResourceNotFoundException("Loan", "LoanNumber", loansDto.getLoanNumber().toString()));
+        Loans loan = loansRepository.findByMobileNumberAndActiveSw(loansDto.getMobileNumber(), LoansConstants.ACTIVE_SW)
+                .orElseThrow(() -> new ResourceNotFoundException("Loan", "LoanNumber", loansDto.getLoanNumber().toString()));
         LoansMapper.mapToLoans(loansDto, loan);
         loansRepository.save(loan);
         return true;
@@ -83,12 +81,9 @@ public class LoansServiceImpl implements ILoansService {
     @Override
     public boolean deleteLoan(Long loanNumber) {
         Loans loan = loansRepository.findById(loanNumber)
-                .orElseThrow(() -> new ResourceNotFoundException("Loan", "loanNumber", loanNumber.toString())
-                );
+                .orElseThrow(() -> new ResourceNotFoundException("Loan", "loanNumber", loanNumber.toString()));
         loan.setActiveSw(LoansConstants.IN_ACTIVE_SW);
         loansRepository.save(loan);
         return true;
     }
-
-
 }

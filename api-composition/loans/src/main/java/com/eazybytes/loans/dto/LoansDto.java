@@ -28,5 +28,4 @@ public class LoansDto {
     private int outstandingAmount;
 
     private boolean activeSw;
-
 }

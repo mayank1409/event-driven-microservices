@@ -12,10 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-/**
- * @author Eazy Bytes
- */
-
 @RestController
 @RequestMapping(path = "/api", produces = {MediaType.APPLICATION_JSON_VALUE})
 @Validated
@@ -28,19 +24,16 @@ public class LoansController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<ResponseDto> createLoan(@RequestParam("mobileNumber")
-    @Pattern(regexp = "(^$|[0-9]{10})", message = "Mobile number must be 10 digits")
-    String mobileNumber) {
+    public ResponseEntity<ResponseDto> createLoan(@RequestParam("mobileNumber") @Pattern(regexp = "(^$|[0-9]{10})", message = "Mobile number must be 10 digits")
+                                                      String mobileNumber) {
         iLoansService.createLoan(mobileNumber);
-        return ResponseEntity
-                .status(HttpStatus.CREATED)
+        return ResponseEntity.status(HttpStatus.CREATED)
                 .body(new ResponseDto(LoansConstants.STATUS_201, LoansConstants.MESSAGE_201));
     }
 
     @GetMapping("/fetch")
-    public ResponseEntity<LoansDto> fetchLoanDetails(@RequestParam("mobileNumber")
-    @Pattern(regexp = "(^$|[0-9]{10})", message = "Mobile number must be 10 digits")
-    String mobileNumber) {
+    public ResponseEntity<LoansDto> fetchLoanDetails(@RequestParam("mobileNumber") @Pattern(regexp = "(^$|[0-9]{10})", message = "Mobile number must be 10 digits")
+                                                         String mobileNumber) {
         LoansDto loansDto = iLoansService.fetchLoan(mobileNumber);
         return ResponseEntity.status(HttpStatus.OK).body(loansDto);
     }
@@ -49,14 +42,11 @@ public class LoansController {
     public ResponseEntity<ResponseDto> updateLoanDetails(@Valid @RequestBody LoansDto loansDto) {
         boolean isUpdated = iLoansService.updateLoan(loansDto);
         if (isUpdated) {
-            return ResponseEntity
-                    .status(HttpStatus.OK)
+            return ResponseEntity.status(HttpStatus.OK)
                     .body(new ResponseDto(LoansConstants.STATUS_200, LoansConstants.MESSAGE_200));
         } else {
-            return ResponseEntity
-                    .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new ResponseDto(LoansConstants.STATUS_500,
-                            LoansConstants.MESSAGE_500_UPDATE));
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ResponseDto(LoansConstants.STATUS_500, LoansConstants.MESSAGE_500_UPDATE));
         }
     }
 
@@ -65,15 +55,11 @@ public class LoansController {
     Long loanNumber) {
         boolean isDeleted = iLoansService.deleteLoan(loanNumber);
         if (isDeleted) {
-            return ResponseEntity
-                    .status(HttpStatus.OK)
+            return ResponseEntity.status(HttpStatus.OK)
                     .body(new ResponseDto(LoansConstants.STATUS_200, LoansConstants.MESSAGE_200));
         } else {
-            return ResponseEntity
-                    .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new ResponseDto(LoansConstants.STATUS_500,
-                            LoansConstants.MESSAGE_500_DELETE));
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ResponseDto(LoansConstants.STATUS_500, LoansConstants.MESSAGE_500_DELETE));
         }
     }
-
 }

@@ -10,5 +10,4 @@ import java.util.Optional;
 public interface CardsRepository extends JpaRepository<Cards, Long> {
 
     Optional<Cards> findByMobileNumberAndActiveSw(String mobileNumber, boolean activeSw);
-
 }

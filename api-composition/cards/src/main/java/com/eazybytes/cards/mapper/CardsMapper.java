@@ -5,23 +5,21 @@ import com.eazybytes.cards.entity.Cards;
 
 public class CardsMapper {
 
-    public static CardsDto mapToCardsDto(Cards cards, CardsDto cardsDto) {
-        cardsDto.setCardNumber(cards.getCardNumber());
-        cardsDto.setCardType(cards.getCardType());
-        cardsDto.setMobileNumber(cards.getMobileNumber());
-        cardsDto.setTotalLimit(cards.getTotalLimit());
-        cardsDto.setAvailableAmount(cards.getAvailableAmount());
-        cardsDto.setAmountUsed(cards.getAmountUsed());
-        cardsDto.setActiveSw(cards.isActiveSw());
+    public static CardsDto mapToCardsDto(Cards card, CardsDto cardsDto) {
+        cardsDto.setCardNumber(card.getCardNumber());
+        cardsDto.setCardType(card.getCardType());
+        cardsDto.setMobileNumber(card.getMobileNumber());
+        cardsDto.setTotalLimit(card.getTotalLimit());
+        cardsDto.setAvailableAmount(card.getAvailableAmount());
+        cardsDto.setAmountUsed(card.getAmountUsed());
+        cardsDto.setActiveSw(card.isActiveSw());
         return cardsDto;
     }
 
-    public static Cards mapToCards(CardsDto cardsDto, Cards cards) {
-        cards.setCardType(cardsDto.getCardType());
-        cards.setTotalLimit(cardsDto.getTotalLimit());
-        cards.setAvailableAmount(cardsDto.getAvailableAmount());
-        cards.setAmountUsed(cardsDto.getAmountUsed());
-        return cards;
+    public static void mapToCards(CardsDto cardsDto, Cards card) {
+        card.setCardType(cardsDto.getCardType());
+        card.setTotalLimit(cardsDto.getTotalLimit());
+        card.setAvailableAmount(cardsDto.getAvailableAmount());
+        card.setAmountUsed(cardsDto.getAmountUsed());
     }
-
 }

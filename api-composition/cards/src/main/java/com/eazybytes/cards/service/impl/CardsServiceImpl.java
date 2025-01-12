@@ -57,8 +57,7 @@ public class CardsServiceImpl implements ICardsService {
     @Override
     public CardsDto fetchCard(String mobileNumber) {
         Cards card = cardsRepository.findByMobileNumberAndActiveSw(mobileNumber, CardsConstants.ACTIVE_SW)
-                .orElseThrow(() -> new ResourceNotFoundException("Card", "mobileNumber", mobileNumber)
-                );
+                .orElseThrow(() -> new ResourceNotFoundException("Card", "mobileNumber", mobileNumber));
         return CardsMapper.mapToCardsDto(card, new CardsDto());
     }
 
@@ -68,9 +67,8 @@ public class CardsServiceImpl implements ICardsService {
      */
     @Override
     public boolean updateCard(CardsDto cardsDto) {
-        Cards card = cardsRepository.findByMobileNumberAndActiveSw(cardsDto.getMobileNumber(),
-                CardsConstants.ACTIVE_SW).orElseThrow(() -> new ResourceNotFoundException("Card", "CardNumber",
-                cardsDto.getCardNumber().toString()));
+        Cards card = cardsRepository.findByMobileNumberAndActiveSw(cardsDto.getMobileNumber(), CardsConstants.ACTIVE_SW)
+                .orElseThrow(() -> new ResourceNotFoundException("Card", "CardNumber", cardsDto.getCardNumber().toString()));
         CardsMapper.mapToCards(cardsDto, card);
         cardsRepository.save(card);
         return true;
@@ -83,8 +81,7 @@ public class CardsServiceImpl implements ICardsService {
     @Override
     public boolean deleteCard(Long cardNumber) {
         Cards card = cardsRepository.findById(cardNumber)
-                .orElseThrow(() -> new ResourceNotFoundException("Card", "cardNumber", cardNumber.toString())
-                );
+                .orElseThrow(() -> new ResourceNotFoundException("Card", "cardNumber", cardNumber.toString()));
         card.setActiveSw(CardsConstants.IN_ACTIVE_SW);
         cardsRepository.save(card);
         return true;

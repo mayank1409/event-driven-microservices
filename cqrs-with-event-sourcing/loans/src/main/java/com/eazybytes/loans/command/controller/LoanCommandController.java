@@ -23,7 +23,6 @@ import java.util.Random;
  * Rest controller to handle loan commands. The commands are handled by axon
  * framework and are used to create, update and delete loans.
  *
- * @author Eazy Bytes
  */
 @RestController
 @RequestMapping(path = "/api", produces = {MediaType.APPLICATION_JSON_VALUE})

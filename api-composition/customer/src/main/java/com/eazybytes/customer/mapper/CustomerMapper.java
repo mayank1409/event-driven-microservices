@@ -19,10 +19,9 @@ public class CustomerMapper {
         customer.setName(customerDto.getName());
         customer.setEmail(customerDto.getEmail());
         customer.setMobileNumber(customerDto.getMobileNumber());
-        if(customerDto.isActiveSw()) {
-            customer.setActiveSw(customerDto.isActiveSw());
+        if (customerDto.isActiveSw()) {
+            customer.setActiveSw(true);
         }
         return customer;
     }
-
 }

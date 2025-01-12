@@ -23,5 +23,4 @@ public class CustomerDto {
     private String mobileNumber;
 
     private boolean activeSw;
-
 }

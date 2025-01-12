@@ -34,11 +34,9 @@ public class CustomerServiceImpl implements ICustomerService {
 
     @Override
     public CustomerDto fetchCustomer(String mobileNumber) {
-        Customer customer = customerRepository.findByMobileNumberAndActiveSw(mobileNumber, true).orElseThrow(
-                () -> new ResourceNotFoundException("Customer", "mobileNumber", mobileNumber)
-        );
-        CustomerDto customerDto = CustomerMapper.mapToCustomerDto(customer, new CustomerDto());
-        return customerDto;
+        Customer customer = customerRepository.findByMobileNumberAndActiveSw(mobileNumber, true)
+                .orElseThrow(() -> new ResourceNotFoundException("Customer", "mobileNumber", mobileNumber));
+        return CustomerMapper.mapToCustomerDto(customer, new CustomerDto());
     }
 
     @Override
@@ -52,12 +50,10 @@ public class CustomerServiceImpl implements ICustomerService {
 
     @Override
     public boolean deleteCustomer(String customerId) {
-        Customer customer = customerRepository.findById(customerId).orElseThrow(
-                () -> new ResourceNotFoundException("Customer", "customerId", customerId)
-        );
+        Customer customer = customerRepository.findById(customerId)
+                .orElseThrow(() -> new ResourceNotFoundException("Customer", "customerId", customerId));
         customer.setActiveSw(CustomerConstants.IN_ACTIVE_SW);
         customerRepository.save(customer);
         return true;
     }
-
 }
